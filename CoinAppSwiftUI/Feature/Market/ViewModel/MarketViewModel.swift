@@ -37,19 +37,20 @@ final class MarketViewModelImpl: MarketViewModel {
         }
         do {
             // send request to the api
-            let coins = try await service.fetchTopCoins(page: page, perPage: perPage)
+            let fetchedCoins = try await service.fetchTopCoins(page: page, perPage: perPage)
             // if the response is empty it means that we have reached to the end of the list
-            if coins.isEmpty {
+            guard !fetchedCoins.isEmpty else {
                 hasReachedMax = true
                 return
             }
             // appending the api response to the coins array
-            self.coins.append(contentsOf: coins)
+            coins.append(contentsOf: fetchedCoins)
             // updating the state
-            state = .loaded(self.coins)
+            state = .loaded(coins)
             page += 1
         } catch {
             // error case
+            state = .error
             print(error.localizedDescription)
         }
     }
@@ -60,14 +61,15 @@ final class MarketViewModelImpl: MarketViewModel {
         coins = []
         do {
             // send request to the api
-            let coins = try await service.fetchTopCoins(page: page, perPage: perPage)
+            let fetchedCoins = try await service.fetchTopCoins(page: page, perPage: perPage)
             // appending the api response to the coins array
-            self.coins.append(contentsOf: coins)
+            coins.append(contentsOf: fetchedCoins)
             // updating the state
-            state = .loaded(self.coins)
+            state = .loaded(coins)
             page += 1
         } catch {
             // error case
+            state = .error
             print(error.localizedDescription)
         }
     }

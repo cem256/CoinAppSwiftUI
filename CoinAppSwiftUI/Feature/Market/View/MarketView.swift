@@ -73,7 +73,7 @@ private struct ErrorView: View {
 
     var body: some View {
         VStack {
-            Text("Oops something went wrong! but it's not your fault").multilineTextAlignment(.center)
+            Text("Oops something went wrong! But it's not your fault").multilineTextAlignment(.center)
             HStack {
                 Image(systemName: "arrow.clockwise").foregroundColor(.accentColor)
                 Button("Retry") {

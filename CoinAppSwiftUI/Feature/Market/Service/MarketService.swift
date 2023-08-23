@@ -19,7 +19,7 @@ final class MarketServiceImpl: MarketService {
     }
 
     func fetchTopCoins(page: Int, perPage: Int) async throws -> [Coin] {
-        let queryParameters: [String: String] = ["page": "\(page)", "per_page": "\(perPage)", "vs_currency": "usd", "order": "market_cap_desc", "sparkline": "false", "price_change_percentage": "1h,24h,7d"]
+        let queryParameters: [String: String] = ["page": "\(page)", "per_page": "\(perPage)", "vs_currency": "usd", "order": "market_cap_desc", "sparkline": "true", "price_change_percentage": "24h"]
 
         let (data, _) = try await networkClient.performRequest(path: ApiConstants.topCoins, method: HTTPMethod.get, queryParameters: queryParameters)
 
