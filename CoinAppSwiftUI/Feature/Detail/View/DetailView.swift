@@ -15,6 +15,7 @@ struct DetailView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 CustomChartView(coin: coin)
+                    .padding(.vertical)
                 Text("Overview").font(.title.bold())
                 Divider()
                 LazyVGrid(columns: columns, alignment: .leading, content: {
