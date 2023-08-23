@@ -54,6 +54,11 @@ struct DetailView: View {
         .padding()
         .navigationTitle(coin.uName)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                CircularNetworkImage(imageUrl: coin.uImage)
+            }
+        }
     }
 }
 
